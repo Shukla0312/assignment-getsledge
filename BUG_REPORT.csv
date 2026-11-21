@@ -1,0 +1,22 @@
+Bug ID,Title,Severity,Status,URL,Browser,OS,Steps to Reproduce,Expected Result,Actual Result,Notes
+BUG-001,"Cookie banner covers clickable content across the site",Medium,Open,"https://www.getsledge.com (all pages)","Chrome 131 / Firefox 133 / Safari 18.2",macOS Sequoia 15.4,"1. Open getsledge.com in incognito
+2. Scroll to the footer
+3. Try clicking Privacy Policy or social icons
+4. Go to /contact-us and scroll to the form
+5. Check the Send message button at 1280x720","Footer links and buttons should stay clickable while the banner is up","Cookie banner is fixed at the bottom and covers footer links, social icons, and parts of the contact form submit button. Can't click anything behind it until you dismiss it.","Hits every new visitor. Worse on smaller viewports. Quick fix: add ~120px bottom padding to main content when banner is showing."
+BUG-002,"""Try it now"" text on homepage is not clickable",Low,Open,https://www.getsledge.com,"Chrome 131 / Firefox 133 / Safari 18.2",macOS Sequoia 15.4,"1. Go to getsledge.com
+2. Look at the hero section below the heading
+3. See the ""Try it now"" text next to the laptop mockup
+4. Try to click it","The text should be a clickable link or button that takes users to sign-up or the demo","The ""Try it now"" text is plain text with no link or click handler. The cursor doesn't change to a pointer on hover. It looks like a CTA but does nothing.","Confusing UX - it's styled like a call to action but isn't interactive. Either make it a real link to /sign-up or restyle it so it doesn't look clickable."
+BUG-003,"Contact form has no visible required field indicators",Medium,Open,https://www.getsledge.com/contact-us,"Chrome 131 / Firefox 133 / Safari 18.2",macOS Sequoia 15.4,"1. Go to /contact-us
+2. Scroll down to the contact form
+3. Look at the form field labels (First Name, Last Name, Email, Message)
+4. Try submitting empty - form blocks it but doesn't tell you which fields are required","Required fields should have asterisks or some visual indicator. Validation errors should appear next to the specific fields that need attention.","No required field markers (asterisks etc) on any label. When you submit empty, the browser shows a generic tooltip on the first empty field but there's no custom error messaging or red highlights. Company Name is optional but nothing tells you that either.","Users have to guess which fields are mandatory. The (optional) label on Company Name hints at it but the required fields should be explicitly marked."
+BUG-004,"Pro plan on pricing page looks interactive but isn't available",Low,Open,https://www.getsledge.com/pricing,"Chrome 131 / Firefox 133 / Safari 18.2",macOS Sequoia 15.4,"1. Go to /pricing
+2. Look at the three plan cards: Open Beta, Pro, Enterprise
+3. The Pro card says ""Coming soon"" but has no disabled styling
+4. Hover/click around the Pro card area","The Pro card should be visually distinct (greyed out or clearly marked) so users know it's not available yet. Should not look like a selectable option.","The Pro card is styled the same as the other two active plans. There's no CTA button but the card itself doesn't look disabled. No tooltip or message explaining when Pro will be available. Users might think something is broken.","Inconsistent with the other cards that have clear CTAs. Add a disabled state or a ""notify me"" option so the card serves a purpose."
+BUG-005,"Contact form labels are not associated with inputs via for/id attributes",Medium,Open,https://www.getsledge.com/contact-us,"Chrome 131 / Firefox 133 / Safari 18.2",macOS Sequoia 15.4,"1. Go to /contact-us
+2. Scroll to the form
+3. Click on the label text ""First Name"" above the input field
+4. Observe whether the input gets focused","Clicking a label should focus its associated input field. This is standard HTML accessibility behavior using label for/id pairing.","Clicking on the label text does not focus the corresponding input. Labels appear to be plain text or divs rather than proper <label> elements linked with for attributes. Screen readers also won't associate the label with the input.","Accessibility issue (WCAG 2.1 violation - 1.3.1 Info and Relationships). Affects keyboard-only and screen reader users. Fix: use <label for=""firstName""> or wrap inputs inside <label> elements."
